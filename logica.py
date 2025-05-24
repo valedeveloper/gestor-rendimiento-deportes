@@ -7,7 +7,7 @@ class Participante:
         self.id=id
         self.nombre=nombre
         self.resultados=resultados
-        self.dificultades = [random.uniform(1.0, 1.3) for _ in range(3)]
+        self.dificultades = [round(random.uniform(1.0, 1.3),2) for _ in range(3)]
         
 
     def calcular_puntaje_final(self):
@@ -20,8 +20,12 @@ class Participante:
 
     def clasificar_puntaje(self):
         """Clasifica segun puntaje"""
-        puntaje_participante=self.clasificar_puntaje()
-        return puntaje_participante>=70
+        puntaje_participante=self.calcular_puntaje_final()
+        
+        if puntaje_participante>=70:
+            return "Clasificó"
+        
+        return "No clasificó"
     
     def reporte_participante(self):
         return {
@@ -40,6 +44,7 @@ class GestionarParticipantes:
         self.contador_id=self.recuperar_ultimo_id()+1
     
     def añadir_participante(self, nombre,resultados):
+        resultados=[float(resultado) for resultado in resultados]
         nuevo_participante = Participante(self.contador_id, nombre,resultados)
         
         with open(self.archivo, 'a', newline='', encoding='utf-8') as f:
@@ -55,10 +60,8 @@ class GestionarParticipantes:
         df['id'] = df['id'].astype(str)
         id = str(id_participante)
         
-        if id in df["id"]:
-            return df[df["id"]==id]
-        return False
-    
+        return df[df["id"]==id]
+      
     
     def leer_csv_participantes(self):
         if os.path.isfile(self.archivo):
