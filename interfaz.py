@@ -69,6 +69,10 @@ def mostrar_participantes():
         encabezado = f"{'ID':<5}{'Nombre':<15}{'Resultados':<25}{'Dificultades':<30}{'Puntaje':<10}{'Estado':<15}\n"
         encabezado += "-" * 105 + "\n"
         text_area.insert(tk.END, encabezado)
+        
+        df["resultados"] = df[["resultado1", "resultado2", "resultado3"]].values.tolist()
+        df["dificultades"] = df[["dificultad1", "dificultad2", "dificultad3"]].values.tolist()
+        
         for _, fila in df.iterrows():
             linea = f"{str(fila['id']):<5}{fila['nombre']:<15}{str(fila['resultados']):<25}{str(fila['dificultades']):<30}{str(fila['puntaje_final']):<10}{fila['estado_participante']:<15}\n"
             text_area.insert(tk.END, linea)
