@@ -50,8 +50,13 @@ def agregar_participante():
     if not all([nombre, resultado_resistencia, resultado_fuerza, resultado_velocidad]):
         messagebox.showwarning("Campos vacíos", "Por favor completa todos los campos.")
         return
+    
+    try:
+        resultados = [float(resultado_resistencia), float(resultado_fuerza), float(resultado_velocidad)]
+    except ValueError:
+        messagebox.showerror("Error", "Los resultados deben ser números.")
+        return
 
-    resultados = [resultado_resistencia, resultado_fuerza, resultado_velocidad]
     participantes.añadir_participante(nombre, resultados)
     messagebox.showinfo("Éxito", "Participante registrado.")
     mostrar_participantes()
@@ -72,11 +77,17 @@ def mostrar_participantes():
 
 def mostrar_participantes_id():
     text_area.delete("1.0", tk.END)
-    id_participante = entry_id_participante.get()
-    if not id_participante:
+    if not entry_id_participante.get():
         messagebox.showwarning("Campos vacíos", "Por favor completa el ID.")
         return
+    try:
+        id_participante = entry_id_participante.get()
+    except ValueError:
+        messagebox.showerror("Error", "Los resultados deben ser números.")
+        return
+    #Validar campo
 
+    
     df = participantes.mostrar_participantes_id(id_participante)
     if isinstance(df, pd.DataFrame) and not df.empty:
         encabezado = f"{'ID':<5}{'Nombre':<15}{'Puntaje':<10}{'Estado':<15}\n"

@@ -6,7 +6,7 @@ class Participante:
     def __init__(self,id,nombre,resultados):
         self.id=id
         self.nombre=nombre
-        self.resultados=resultados
+        self.resultados=[float(r) for r in resultados]
         self.dificultades = [round(random.uniform(1.0, 1.3),2) for _ in range(3)]
         
 
@@ -44,7 +44,6 @@ class GestionarParticipantes:
         self.contador_id=self.recuperar_ultimo_id()+1
     
     def añadir_participante(self, nombre,resultados):
-        resultados=[float(resultado) for resultado in resultados]
         nuevo_participante = Participante(self.contador_id, nombre,resultados)
         
         with open(self.archivo, 'a', newline='', encoding='utf-8') as f:
