@@ -6,13 +6,8 @@ class Participante:
     def __init__(self,id,nombre,resultados):
         self.id=id
         self.nombre=nombre
-<<<<<<< HEAD
-        self.resultados=[float(r) for r in resultados]
-        self.dificultades = [round(random.uniform(1.0, 1.3),2) for _ in range(3)]
-=======
         self.resultados=resultados
         self.dificultades = [random.uniform(1.0, 1.3) for _ in range(3)]
->>>>>>> d0cf99a6775e69ae084faea91beec6019c610354
         
 
     def calcular_puntaje_final(self):
@@ -25,17 +20,8 @@ class Participante:
 
     def clasificar_puntaje(self):
         """Clasifica segun puntaje"""
-<<<<<<< HEAD
-        puntaje_participante=self.calcular_puntaje_final()
-        
-        if puntaje_participante>=70:
-            return "Clasificó"
-        
-        return "No clasificó"
-=======
         puntaje_participante=self.clasificar_puntaje()
         return puntaje_participante>=70
->>>>>>> d0cf99a6775e69ae084faea91beec6019c610354
     
     def reporte_participante(self):
         return {
@@ -69,15 +55,10 @@ class GestionarParticipantes:
         df['id'] = df['id'].astype(str)
         id = str(id_participante)
         
-<<<<<<< HEAD
-        return df[df["id"]==id]
-      
-=======
         if id in df["id"]:
             return df[df["id"]==id]
         return False
     
->>>>>>> d0cf99a6775e69ae084faea91beec6019c610354
     
     def leer_csv_participantes(self):
         if os.path.isfile(self.archivo):
