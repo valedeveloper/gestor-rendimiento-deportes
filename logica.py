@@ -50,6 +50,7 @@ class GestionarParticipantes:
 
     def añadir_participante(self, nombre,resultados):
         """Añade un participante y lo agrega al csv"""
+
         nuevo_participante = Participante(self.contador_id, nombre,resultados)
         
         with open(self.archivo, 'a', newline='', encoding='utf-8') as f:
@@ -62,6 +63,7 @@ class GestionarParticipantes:
     
     def mostrar_participantes_id(self,id_participante):
         """Muestra un participante segun su id"""
+
         df=self.leer_csv_participantes()
         df['id'] = df['id'].astype(str)
         id = str(id_participante)
@@ -70,12 +72,14 @@ class GestionarParticipantes:
     
     def leer_csv_participantes(self):
         """Lee el csv y devuelve su ifno"""
+
         if os.path.isfile(self.archivo):
             return pd.read_csv(self.archivo)
         return pd.DataFrame(columns=self.campos)
     
     def recuperar_ultimo_id(self):
         """Recupera el último id para seguir unsa secuencia"""
+        
         if os.path.isfile(self.archivo):
              df = self.leer_csv_participantes()
              if not df.empty:

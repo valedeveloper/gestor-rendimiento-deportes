@@ -230,6 +230,7 @@ campos = [
 
 #Mapeo campos y devuelvo un componente tk.label
 entradas = []
+
 for campo, fila in campos:
     tk.Label(base, text=campo, font=negrita, bg="#f0f4f7").grid(row=fila, column=0, padx=10, pady=5, sticky="e")
     entrada = tk.Entry(base, width=30)

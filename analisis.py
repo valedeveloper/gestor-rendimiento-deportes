@@ -30,6 +30,7 @@ class DataAnalyzer:
 
     def summary(self):
         """Brinda un resumen de los datos"""
+
         buffer = io.StringIO()
         self.df.info(buf=buffer)
         salida_info = buffer.getvalue()
@@ -39,11 +40,13 @@ class DataAnalyzer:
     
     def promedio_puntaje_final(self):
          """Devuevle el puntaje final de la persona"""
+
          return round(np.mean(self.df["puntaje_final"]),2)
 
     #Funcionamiento y personalización de la librería Seaborn https://seaborn.pydata.org/generated/seaborn.color_palette.html
     def grafico_circular(self):
         """Hace un gráfico circular del estado de los participantes"""
+
         conteo_estado_participante = self.df["estado_participante"].value_counts()
         
         fig, ax = plt.subplots(figsize=(5, 5)) 
@@ -78,8 +81,6 @@ class DataAnalyzer:
 
         return fig_to_pil(fig)
 
-    
-
     def histograma_resultados(self):
         """Histograma de resutlado"""
 
@@ -100,7 +101,6 @@ class DataAnalyzer:
         return fig_to_pil(fig)
     
     def histograma_resultados_id(self,id_participante):
-        
         self.df['id'] = self.df['id'].astype(str)
         id = str(id_participante)
         fila_filtrada = self.df[self.df['id'] == id]
@@ -124,9 +124,7 @@ class DataAnalyzer:
 
         return fig_to_pil(fig)            
    
-    
     def histograma_dificultades(self):
-        
         fig, ax = plt.subplots(figsize=(5, 5))
         ax.hist(self.df["dificultad1"], bins=10, alpha=0.5, label="Dificultad 1",color='red', edgecolor='black')
         ax.hist(self.df["dificultad2"], bins=10, alpha=0.5, label="Dificultad 2",color='blue', edgecolor='black')
@@ -142,7 +140,6 @@ class DataAnalyzer:
         return fig_to_pil(fig)
     
     def histograma_dificultades_id(self,id_participante):
-        
         self.df['id'] = self.df['id'].astype(str)
         id = str(id_participante)
         fila_filtrada = self.df[self.df['id'] == id]
@@ -169,9 +166,7 @@ class DataAnalyzer:
         fig.tight_layout()
         return fig_to_pil(fig)
    
-    
     def histograma_ponderado_por_prueba(self):
-
         if "ponderado1" not in self.df.columns:
             self.df["ponderado1"] = self.df["resultado1"] * self.df["dificultad1"]
             self.df["ponderado2"] = self.df["resultado2"] * self.df["dificultad2"]
@@ -194,7 +189,6 @@ class DataAnalyzer:
         return fig_to_pil(fig)
     
     def histograma_ponderado_por_prueba_id(self,id_participante):
-
         self.df["id"]=self.df["id"].astype(str)
         id=str(id_participante)
 
