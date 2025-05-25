@@ -10,7 +10,6 @@ class Participante:
         self.dificultades = [round(random.uniform(1.0, 1.3),2) for _ in range(3)]
         self.resultados=resultados
         
-
     def calcular_puntaje_final(self):
         """Calcula el puntaje del participante"""
 
@@ -18,10 +17,10 @@ class Participante:
         suma_ponderada=sum(resultado*dificultad for resultado,dificultad in zip(self.resultados,self.dificultades))
         suma_dificultades=sum(self.dificultades)
         return round(suma_ponderada/suma_dificultades,1)
-    
 
     def clasificar_puntaje(self):
         """Clasifica segun puntaje"""
+
         puntaje_participante=self.calcular_puntaje_final()
         
         if puntaje_participante>=70:
@@ -29,7 +28,6 @@ class Participante:
         
         return "No clasificó"
         
-    
     def reporte_participante(self):
         return {
                 "id": self.id,
@@ -69,14 +67,12 @@ class GestionarParticipantes:
         id = str(id_participante)
         
         return df[df["id"]==id]
-
     
     def leer_csv_participantes(self):
         """Lee el csv y devuelve su ifno"""
         if os.path.isfile(self.archivo):
             return pd.read_csv(self.archivo)
         return pd.DataFrame(columns=self.campos)
-    
     
     def recuperar_ultimo_id(self):
         """Recupera el último id para seguir unsa secuencia"""
